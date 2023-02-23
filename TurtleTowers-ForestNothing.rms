@@ -1,21 +1,24 @@
 /* TurtleTowers-ForestNothing | TrtleTunnl's 2023 Remix */
 /* https://www.ageofempires.com/mods/details/150470 */
+/* https://github.com/TrtleTunnl/AoE2-TurtleTowers */
 /* A prettier "Forest Nothing" map with TURTLES, controllable towers, and simple exploding kings for Regicide */
 /* Towers encourage objective-style fighting toward the center */
 /* Random Map, Regicide, and King of the Hill support for Age of Empires II: Definitive Edition */
-/* Map Version: T10 */
+/* Map Version: T11 */
 
 /* MAP STYLES */
 start_random
-	percent_chance 40 /* snowy pine map */
+	percent_chance 35 /* snowy pine map */
 		#define COLDMAP
-	percent_chance 60 /* tropical palm map */
+	percent_chance 65 /* tropical palm map */
 		#define WARMMAP
 end_random
 /* CONSTANTS */
 #const OAKBUSH 20 /* oak forest */
 #const FUNGUSROAD 75 /* grassy road */
+#const GRAVELROAD 78 /* rocky road */
 #const TECHONAGER 257 /* onager tech */
+
 
 <PLAYER_SETUP>
 
@@ -40,7 +43,7 @@ if REGICIDE /* SIMPLE EXPLODING KINGS */
 	effect_amount SET_ATTRIBUTE KING_CLASS ATTR_DEAD_ID 706 /* replace dead king with saboteur */
 	effect_amount SET_ATTRIBUTE SABOTEUR ATTR_HITPOINTS 0 /* set saboteur to 0 hp to trigger explosion */
 	effect_amount SET_ATTRIBUTE SABOTEUR ATTR_MAX_RANGE 10
-	effect_amount SET_ATTRIBUTE SABOTEUR ATTR_BLAST_RADIUS 10 /* 10 tile radius explosion size */
+	effect_amount SET_ATTRIBUTE SABOTEUR ATTR_BLAST_RADIUS 10 /* 10 tile radius explosion */
 	effect_amount SET_ATTRIBUTE SABOTEUR ATTR_BLAST_LEVEL 1 /* hits units, buildings & trees */
 	effect_amount ADD_ATTRIBUTE SABOTEUR ATTR_ATTACK 256 /* stacking explosion damage */
 	effect_amount ADD_ATTRIBUTE SABOTEUR ATTR_ATTACK 256
@@ -214,7 +217,7 @@ if COLDMAP
 	
 	create_land /* top island */
 	{
-		terrain_type GRASS_SNOW
+		terrain_type GRAVELROAD
 		base_size 1
 		number_of_tiles 0
 		land_position 60 40
@@ -223,7 +226,7 @@ if COLDMAP
 	}
 	create_land /* left island */
 	{
-		terrain_type GRASS_SNOW
+		terrain_type GRAVELROAD
 		base_size 1
 		number_of_tiles 0
 		land_position 37 47
@@ -232,7 +235,7 @@ if COLDMAP
 	}
 	create_land /* right island */
 	{
-		terrain_type GRASS_SNOW
+		terrain_type GRAVELROAD
 		base_size 1
 		number_of_tiles 0
 		land_position 53 63
@@ -243,7 +246,7 @@ elseif WARMMAP
 	base_layer GRASS2 /* grassy ground */
 	create_land /* top island */
 	{
-		terrain_type ROAD
+		terrain_type ROAD2
 		base_size 1
 		number_of_tiles 0
 		land_position 60 40
@@ -252,7 +255,7 @@ elseif WARMMAP
 	}
 	create_land /* left island */
 	{
-		terrain_type ROAD
+		terrain_type ROAD2
 		base_size 1
 		number_of_tiles 0
 		land_position 37 47
@@ -261,7 +264,7 @@ elseif WARMMAP
 	}
 	create_land /* right island */
 	{
-		terrain_type ROAD
+		terrain_type ROAD2
 		base_size 1
 		number_of_tiles 0
 		land_position 53 63
@@ -284,7 +287,7 @@ create_land
 	terrain_type SHALLOW
 	base_size 1
 	land_position 1 1
-	land_id 31
+	land_id 30
 if TINY_MAP
 	number_of_tiles 50
 elseif SMALL_MAP
@@ -306,7 +309,7 @@ create_land
 	terrain_type SHALLOW
 	base_size 1
 	land_position 99 1
-	land_id 32
+	land_id 30
 if TINY_MAP
 	number_of_tiles 40
 elseif SMALL_MAP
@@ -328,7 +331,7 @@ create_land
 	terrain_type SHALLOW
 	base_size 1
 	land_position 99 99
-	land_id 33
+	land_id 30
 if TINY_MAP
 	number_of_tiles 40
 elseif SMALL_MAP
@@ -350,7 +353,7 @@ create_land
 	terrain_type SHALLOW
 	base_size 1
 	land_position 1 99
-	land_id 34
+	land_id 30
 if TINY_MAP
 	number_of_tiles 40
 elseif SMALL_MAP
@@ -372,7 +375,7 @@ create_land
 {
 	terrain_type SHALLOW
 	base_size 1
-	land_position 1 50
+	land_position 1 33
 	land_id 35
 if TINY_MAP
 	number_of_tiles 18
@@ -394,8 +397,31 @@ create_land
 {
 	terrain_type SHALLOW
 	base_size 1
-	land_position 50 1
-	land_id 36
+	land_position 1 66
+	land_id 35
+if TINY_MAP
+	number_of_tiles 18
+elseif SMALL_MAP
+	number_of_tiles 20
+elseif MEDIUM_MAP
+	number_of_tiles 22
+elseif LARGE_MAP
+	number_of_tiles 24
+elseif HUGE_MAP
+	number_of_tiles 28
+elseif GIGANTIC_MAP
+	number_of_tiles 50
+elseif LUDIKRIS_MAP
+	number_of_tiles 70
+endif
+}
+
+create_land
+{
+	terrain_type SHALLOW
+	base_size 1
+	land_position 33 1
+	land_id 35
 if TINY_MAP
 	number_of_tiles 18
 elseif SMALL_MAP
@@ -416,8 +442,31 @@ create_land
 {
 	terrain_type SHALLOW
 	base_size 1
-	land_position 99 50
-	land_id 37
+	land_position 66 1
+	land_id 35
+if TINY_MAP
+	number_of_tiles 18
+elseif SMALL_MAP
+	number_of_tiles 20
+elseif MEDIUM_MAP
+	number_of_tiles 22
+elseif LARGE_MAP
+	number_of_tiles 24
+elseif HUGE_MAP
+	number_of_tiles 28
+elseif GIGANTIC_MAP
+	number_of_tiles 50
+elseif LUDIKRIS_MAP
+	number_of_tiles 70
+endif
+}
+
+create_land
+{
+	terrain_type SHALLOW
+	base_size 1
+	land_position 99 33
+	land_id 35
 if TINY_MAP
 	number_of_tiles 18
 elseif SMALL_MAP
@@ -438,8 +487,53 @@ create_land
 {
 	terrain_type SHALLOW
 	base_size 1
-	land_position 50 99
-	land_id 38
+	land_position 99 66
+	land_id 35
+if TINY_MAP
+	number_of_tiles 18
+elseif SMALL_MAP
+	number_of_tiles 20
+elseif MEDIUM_MAP
+	number_of_tiles 22
+elseif LARGE_MAP
+	number_of_tiles 24
+elseif HUGE_MAP
+	number_of_tiles 28
+elseif GIGANTIC_MAP
+	number_of_tiles 50
+elseif LUDIKRIS_MAP
+	number_of_tiles 70
+endif
+}
+
+create_land
+{
+	terrain_type SHALLOW
+	base_size 1
+	land_position 33 99
+	land_id 35
+if TINY_MAP
+	number_of_tiles 18
+elseif SMALL_MAP
+	number_of_tiles 20
+elseif MEDIUM_MAP
+	number_of_tiles 22
+elseif LARGE_MAP
+	number_of_tiles 24
+elseif HUGE_MAP
+	number_of_tiles 28
+elseif GIGANTIC_MAP
+	number_of_tiles 50
+elseif LUDIKRIS_MAP
+	number_of_tiles 70
+endif
+}
+create_land
+{
+	terrain_type SHALLOW
+	base_size 1
+	land_position 66 99
+	land_id 35
 if TINY_MAP
 	number_of_tiles 18
 elseif SMALL_MAP
@@ -466,6 +560,13 @@ if COLDMAP /* snowy pine forest variety */
 	create_terrain SNOW /* snowy spawn terrain */
 	{
 		base_terrain FUNGUSROAD
+		land_percent 100
+		number_of_clumps 999
+		terrain_mask 2
+	}
+	create_terrain SNOW /* snowy tower terrain */
+	{
+		base_terrain GRAVELROAD
 		land_percent 100
 		number_of_clumps 999
 		terrain_mask 2
@@ -503,17 +604,17 @@ if COLDMAP /* snowy pine forest variety */
 	if TINY_MAP
 		set_avoid_player_start_areas 12
 	elseif SMALL_MAP
-		set_avoid_player_start_areas 13
+		set_avoid_player_start_areas 12
 	elseif MEDIUM_MAP
-		set_avoid_player_start_areas 14
+		set_avoid_player_start_areas 13
 	elseif LARGE_MAP
-		set_avoid_player_start_areas 15
+		set_avoid_player_start_areas 14
 	elseif HUGE_MAP
-		set_avoid_player_start_areas 16
+		set_avoid_player_start_areas 14
 	elseif GIGANTIC_MAP
-		set_avoid_player_start_areas 17
+		set_avoid_player_start_areas 15
 	elseif LUDIKRIS_MAP
-		set_avoid_player_start_areas 18
+		set_avoid_player_start_areas 16
 	endif
 	}
 	create_terrain DLC_WATER5 /* tower waters */
@@ -590,6 +691,13 @@ elseif WARMMAP /* tropical palm forest variety */
 		number_of_clumps 999
 		terrain_mask 2
 	}
+	create_terrain GRASS3 /* grassy tower terrain */
+	{
+		base_terrain ROAD2
+		land_percent 100
+		number_of_clumps 999
+		terrain_mask 2
+	}
 	create_terrain JUNGLE
 	{
 		base_terrain BAMBOO
@@ -621,19 +729,19 @@ elseif WARMMAP /* tropical palm forest variety */
 		number_of_clumps 999
 		clumping_factor 1
 	if TINY_MAP
-		set_avoid_player_start_areas 13
+		set_avoid_player_start_areas 12
 	elseif SMALL_MAP
-		set_avoid_player_start_areas 14
+		set_avoid_player_start_areas 12
 	elseif MEDIUM_MAP
-		set_avoid_player_start_areas 15
+		set_avoid_player_start_areas 13
 	elseif LARGE_MAP
-		set_avoid_player_start_areas 16
+		set_avoid_player_start_areas 14
 	elseif HUGE_MAP
-		set_avoid_player_start_areas 17
+		set_avoid_player_start_areas 14
 	elseif GIGANTIC_MAP
-		set_avoid_player_start_areas 18
+		set_avoid_player_start_areas 15
 	elseif LUDIKRIS_MAP
-		set_avoid_player_start_areas 20
+		set_avoid_player_start_areas 16
 	endif
 	}
 	create_terrain DLC_WATER5
@@ -708,7 +816,7 @@ endif
 
 create_connect_all_lands /* replace shores for better visuals */
 {
-	replace_terrain BEACH DLC_GRAVELBEACH
+	replace_terrain BEACH DLC_WETROCKBEACH
 	terrain_size BEACH 999 0
 }
 create_connect_all_lands
@@ -759,8 +867,8 @@ create_object BOMBARD_TOWER /* bot tower */
 
 create_object DLC_BOXTURTLE /* turtle time */
 {
-	number_of_objects 60
-	number_of_clumps 60
+	number_of_objects 50
+	number_of_clumps 50
 	terrain_to_place_on DLC_WATER5
 	temp_min_distance_group_placement 1
 	ignore_terrain_restrictions
@@ -845,31 +953,7 @@ if COLDMAP
 		number_of_objects 2
 		set_gaia_object_only
 		temp_min_distance_group_placement 3
-		place_on_specific_land_id 31
-		find_closest
-	}
-	create_object DLC_GOOSE
-	{
-		number_of_objects 2
-		set_gaia_object_only
-		temp_min_distance_group_placement 3
-		place_on_specific_land_id 32
-		find_closest
-	}
-	create_object DLC_GOOSE
-	{
-		number_of_objects 2
-		set_gaia_object_only
-		temp_min_distance_group_placement 3
-		place_on_specific_land_id 33
-		find_closest
-	}
-	create_object DLC_GOOSE
-	{
-		number_of_objects 2
-		set_gaia_object_only
-		temp_min_distance_group_placement 3
-		place_on_specific_land_id 34
+		place_on_specific_land_id 30
 		find_closest
 	}
 	/* SIDE ANIMALS */
@@ -877,30 +961,6 @@ if COLDMAP
 	{
 		number_of_objects 2
 		place_on_specific_land_id 35
-		temp_min_distance_group_placement 3
-		find_closest
-		ignore_terrain_restrictions
-	}
-	create_object DLC_GOOSE
-	{
-		number_of_objects 2
-		place_on_specific_land_id 36
-		temp_min_distance_group_placement 3
-		find_closest
-		ignore_terrain_restrictions
-	}
-	create_object DLC_GOOSE
-	{
-		number_of_objects 2
-		place_on_specific_land_id 37
-		temp_min_distance_group_placement 3
-		find_closest
-		ignore_terrain_restrictions
-	}
-	create_object DLC_GOOSE
-	{
-		number_of_objects 2
-		place_on_specific_land_id 38
 		temp_min_distance_group_placement 3
 		find_closest
 		ignore_terrain_restrictions
@@ -967,31 +1027,7 @@ elseif WARMMAP
 		number_of_objects 2
 		set_gaia_object_only
 		temp_min_distance_group_placement 3
-		place_on_specific_land_id 31
-		find_closest
-	}
-	create_object TURKEY
-	{
-		number_of_objects 2
-		set_gaia_object_only
-		temp_min_distance_group_placement 3
-		place_on_specific_land_id 32
-		find_closest
-	}
-	create_object TURKEY
-	{
-		number_of_objects 2
-		set_gaia_object_only
-		temp_min_distance_group_placement 3
-		place_on_specific_land_id 33
-		find_closest
-	}
-	create_object TURKEY
-	{
-		number_of_objects 2
-		set_gaia_object_only
-		temp_min_distance_group_placement 3
-		place_on_specific_land_id 34
+		place_on_specific_land_id 30
 		find_closest
 	}
 	/* SIDE ANIMALS */
@@ -999,30 +1035,6 @@ elseif WARMMAP
 	{
 		number_of_objects 2
 		place_on_specific_land_id 35
-		temp_min_distance_group_placement 3
-		find_closest
-		ignore_terrain_restrictions
-	}
-	create_object TURKEY
-	{
-		number_of_objects 2
-		place_on_specific_land_id 36
-		temp_min_distance_group_placement 3
-		find_closest
-		ignore_terrain_restrictions
-	}
-	create_object TURKEY
-	{
-		number_of_objects 2
-		place_on_specific_land_id 37
-		temp_min_distance_group_placement 3
-		find_closest
-		ignore_terrain_restrictions
-	}
-	create_object TURKEY
-	{
-		number_of_objects 2
-		place_on_specific_land_id 38
 		temp_min_distance_group_placement 3
 		find_closest
 		ignore_terrain_restrictions
