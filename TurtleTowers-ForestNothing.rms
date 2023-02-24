@@ -848,7 +848,7 @@ create_object BOMBARD_TOWER /* top tower */
 	make_indestructible
 	place_on_specific_land_id 62
 }
-create_object BOMBARD_TOWER /* mid tower */
+create_object BOMBARD_TOWER /* left tower */
 {
 	number_of_objects 1
 	set_gaia_object_only
@@ -856,7 +856,7 @@ create_object BOMBARD_TOWER /* mid tower */
 	make_indestructible
 	place_on_specific_land_id 64
 }
-create_object BOMBARD_TOWER /* bot tower */
+create_object BOMBARD_TOWER /* right tower */
 {
 	number_of_objects 1
 	set_gaia_object_only
