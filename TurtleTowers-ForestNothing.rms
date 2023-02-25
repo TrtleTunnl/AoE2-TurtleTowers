@@ -1,16 +1,15 @@
 /* TurtleTowers-ForestNothing | TrtleTunnl's 2023 Remix */
 /* https://www.ageofempires.com/mods/details/150470 */
 /* https://github.com/TrtleTunnl/AoE2-TurtleTowers */
-/* A prettier "Forest Nothing" map with TURTLES, controllable towers, and simple exploding kings for Regicide */
-/* Towers encourage objective-style fighting toward the center */
+/* A prettier "Forest Nothing" map with TURTLES, controllable towers, and simple exploding kings in Regicide */
 /* Random Map, Regicide, and King of the Hill support for Age of Empires II: Definitive Edition */
-/* Map Version: T11 */
+/* Map Version: T12 */
 
 /* MAP STYLES */
 start_random
-	percent_chance 35 /* snowy pine map */
+	percent_chance 35 /* snowy pines */
 		#define COLDMAP
-	percent_chance 65 /* tropical palm map */
+	percent_chance 65 /* tropical palms */
 		#define WARMMAP
 end_random
 /* CONSTANTS */
@@ -595,7 +594,7 @@ if COLDMAP /* snowy pine forest variety */
 		clumping_factor 3
 		set_avoid_player_start_areas 7
 	}
-	create_terrain SNOW /* dots of terrain for deer placement */
+	create_terrain SNOW /* terrain for deer */
 	{
 		base_terrain SNOW_FOREST
 		land_percent 1
@@ -814,26 +813,34 @@ endif
 
 <CONNECTION_GENERATION>
 
-create_connect_all_lands /* replace shores for better visuals */
-{
-	replace_terrain BEACH DLC_WETROCKBEACH
-	terrain_size BEACH 999 0
-}
-create_connect_all_lands
-{
-	replace_terrain ICYSHORE DLC_GRAVELBEACH
-	terrain_size ICYSHORE 999 0
-}
+if COLDMAP
+	create_connect_all_lands /* replace shores for better visuals */
+	{
+		replace_terrain BEACH DLC_GRAVELBEACH
+		terrain_size BEACH 999 0
+	}
+	create_connect_all_lands
+	{
+		replace_terrain ICYSHORE DLC_BEACH2
+		terrain_size ICYSHORE 999 0
+	}
+elseif WARMMAP
+	create_connect_all_lands
+	{
+		replace_terrain BEACH DLC_WETROCKBEACH
+		terrain_size BEACH 999 0
+	}
+endif
 
 <OBJECTS_GENERATION>
 
-create_object TOWN_CENTER /* starting town center */
+create_object TOWN_CENTER /* town center */
 {
 	set_place_for_every_player
 	min_distance_to_players 0
 	max_distance_to_players 0
 }
-create_object VILLAGER /* starting villagers */
+create_object VILLAGER /* villagers */
 {
 	number_of_objects 7
 	set_place_for_every_player
@@ -874,7 +881,7 @@ create_object DLC_BOXTURTLE /* turtle time */
 	ignore_terrain_restrictions
 }
 
-if REGICIDE /* regicide support - king without a castle */
+if REGICIDE /* regicide - king */
 	create_object KING
 	{
 		set_place_for_every_player
@@ -882,7 +889,7 @@ if REGICIDE /* regicide support - king without a castle */
 		max_distance_to_players 2
 	}
 endif
-if KING_OT_HILL /* king of the hill support - monument */
+if KING_OT_HILL /* king of the hill - monument */
 	create_object MONUMENT
 	{
 		place_on_specific_land_id 60
@@ -919,7 +926,7 @@ if COLDMAP
 		number_of_objects 1
 		set_scaling_to_map_size
 	}
-	create_object DEER /* huntables */
+	create_object DEER /* hunt */
 	{
 		terrain_to_place_on SNOW
 		min_distance_to_map_edge 5
@@ -993,7 +1000,7 @@ elseif WARMMAP
 		number_of_objects 1
 		set_scaling_to_map_size
 	}
-	create_object DEER /* huntables */
+	create_object DEER /* hunt */
 	{
 		terrain_to_place_on LEAVES
 		min_distance_to_map_edge 5
