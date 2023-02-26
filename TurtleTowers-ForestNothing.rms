@@ -1,15 +1,15 @@
 /* TurtleTowers-ForestNothing | TrtleTunnl's 2023 Remix */
 /* https://www.ageofempires.com/mods/details/150470 */
 /* https://github.com/TrtleTunnl/AoE2-TurtleTowers */
-/* A prettier "Forest Nothing" map with TURTLES, controllable towers, and simple exploding kings in Regicide */
+/* A prettier "Forest Nothing" map with TURTLES, controllable towers, relics, and small exploding kings for Regicide */
 /* Random Map, Regicide, and King of the Hill support for Age of Empires II: Definitive Edition */
-/* Map Version: T12 */
+/* Map Version: T14 */
 
 /* MAP STYLES */
 start_random
-	percent_chance 35 /* snowy pines */
+	percent_chance 35 /* snowy map */
 		#define COLDMAP
-	percent_chance 65 /* tropical palms */
+	percent_chance 65 /* tropical map */
 		#define WARMMAP
 end_random
 /* CONSTANTS */
@@ -94,7 +94,7 @@ endif
 
 <LAND_GENERATION>
 
-enable_waves 0 /* no shore waves */
+enable_waves 0 /* no waves */
 base_terrain BAMBOO /* bamboo forest */
 
 /* CENTER AREA */
@@ -213,7 +213,6 @@ endif
 
 if COLDMAP
 	base_layer GRASS_SNOW /* snowy ground */
-	
 	create_land /* top island */
 	{
 		terrain_type GRAVELROAD
@@ -553,17 +552,17 @@ endif
 
 <TERRAIN_GENERATION>
 
-if COLDMAP /* snowy pine forest variety */
+if COLDMAP /* snowy pine forest */
 	color_correction CC_WINTER /* winter filter */
 	
-	create_terrain SNOW /* snowy spawn terrain */
+	create_terrain SNOW /* snowy spawn */
 	{
 		base_terrain FUNGUSROAD
 		land_percent 100
 		number_of_clumps 999
 		terrain_mask 2
 	}
-	create_terrain SNOW /* snowy tower terrain */
+	create_terrain SNOW /* snowy towers */
 	{
 		base_terrain GRAVELROAD
 		land_percent 100
@@ -680,17 +679,17 @@ if COLDMAP /* snowy pine forest variety */
 	endif
 	}
 
-elseif WARMMAP /* tropical palm forest variety */
+elseif WARMMAP /* tropical palm forest */
 	color_correction CC_JUNGLE /* jungle filter */
 	
-	create_terrain LEAVES /* leafy spawn terrain */
+	create_terrain LEAVES /* leafy spawn */
 	{
 		base_terrain FUNGUSROAD
 		land_percent 100
 		number_of_clumps 999
 		terrain_mask 2
 	}
-	create_terrain GRASS3 /* grassy tower terrain */
+	create_terrain GRASS /* grassy towers */
 	{
 		base_terrain ROAD2
 		land_percent 100
@@ -814,7 +813,7 @@ endif
 <CONNECTION_GENERATION>
 
 if COLDMAP
-	create_connect_all_lands /* replace shores for better visuals */
+	create_connect_all_lands /* replace shores */
 	{
 		replace_terrain BEACH DLC_GRAVELBEACH
 		terrain_size BEACH 999 0
@@ -831,6 +830,7 @@ elseif WARMMAP
 		terrain_size BEACH 999 0
 	}
 endif
+
 
 <OBJECTS_GENERATION>
 
@@ -954,16 +954,30 @@ if COLDMAP
 		temp_min_distance_group_placement 16
 	endif
 	}
-	/* CORNER ANIMALS */
+	/* CORNERS */
+	create_object RELIC
+	{
+		number_of_objects 1
+		set_gaia_object_only
+		place_on_specific_land_id 30
+		find_closest
+	}
 	create_object DLC_GOOSE
 	{
-		number_of_objects 2
+		number_of_objects 3
 		set_gaia_object_only
 		temp_min_distance_group_placement 3
 		place_on_specific_land_id 30
 		find_closest
 	}
-	/* SIDE ANIMALS */
+	/* SIDES */
+	create_object RELIC
+	{
+		number_of_objects 1
+		set_gaia_object_only
+		place_on_specific_land_id 35
+		find_closest
+	}
 	create_object DLC_GOOSE
 	{
 		number_of_objects 2
@@ -972,7 +986,7 @@ if COLDMAP
 		find_closest
 		ignore_terrain_restrictions
 	}
-	/* TOWER ANIMALS */
+	/* TOWERS */
 	create_object DLC_SNOWLEOPARD
 	{
 		number_of_objects 1
@@ -1028,16 +1042,30 @@ elseif WARMMAP
 		temp_min_distance_group_placement 16
 	endif
 	}
-	/* CORNER ANIMALS */
+	/* CORNERS */
+	create_object RELIC
+	{
+		number_of_objects 1
+		set_gaia_object_only
+		place_on_specific_land_id 30
+		find_closest
+	}
 	create_object TURKEY
 	{
-		number_of_objects 2
+		number_of_objects 3
 		set_gaia_object_only
 		temp_min_distance_group_placement 3
 		place_on_specific_land_id 30
 		find_closest
 	}
-	/* SIDE ANIMALS */
+	/* SIDES */
+	create_object RELIC
+	{
+		number_of_objects 1
+		set_gaia_object_only
+		place_on_specific_land_id 35
+		find_closest
+	}
 	create_object TURKEY
 	{
 		number_of_objects 2
@@ -1046,7 +1074,7 @@ elseif WARMMAP
 		find_closest
 		ignore_terrain_restrictions
 	}
-	/* TOWER ANIMALS */
+	/* TOWERS */
 	create_object JAGUAR
 	{
 		number_of_objects 1
