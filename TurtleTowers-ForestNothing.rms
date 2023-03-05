@@ -1,9 +1,9 @@
 /* TurtleTowers-ForestNothing | TrtleTunnl's 2023 Remix */
 /* https://www.ageofempires.com/mods/details/150470 */
 /* https://github.com/TrtleTunnl/AoE2-TurtleTowers */
-/* A prettier "Forest Nothing" map with TURTLES, controllable towers, relics, and small exploding kings for Regicide */
+/* A prettier "Forest Nothing" map with TURTLES, relics, controllable towers, and small exploding kings for Regicide */
 /* Random Map, Regicide, and King of the Hill support for Age of Empires II: Definitive Edition */
-/* Map Version: T14 */
+/* Map Version: T15 */
 
 /* MAP STYLES */
 start_random
@@ -17,7 +17,9 @@ end_random
 #const FUNGUSROAD 75 /* grassy road */
 #const GRAVELROAD 78 /* rocky road */
 #const TECHONAGER 257 /* onager tech */
-
+#const GRASSPATCH 1358 /* green grass */
+#const FLOWERPATCH 1366 /* small flowers */
+#const BUTTERFLY3 1610 /* butterflies */
 
 <PLAYER_SETUP>
 
@@ -35,8 +37,10 @@ effect_amount SET_ATTRIBUTE FORAGE ATTR_STORAGE_VALUE 50
 
 effect_amount SET_ATTRIBUTE JAGUAR ATTR_HITPOINTS 200 /* buff tower animals */
 effect_amount SET_ATTRIBUTE JAGUAR ATTR_MOVE_SPEED 1
+effect_amount SET_ATTRIBUTE JAGUAR ATTR_RELOAD_TIME 1
 effect_amount SET_ATTRIBUTE DLC_SNOWLEOPARD ATTR_HITPOINTS 200
 effect_amount SET_ATTRIBUTE DLC_SNOWLEOPARD ATTR_MOVE_SPEED 1
+effect_amount SET_ATTRIBUTE DLC_SNOWLEOPARD ATTR_RELOAD_TIME 1
 
 if REGICIDE /* SIMPLE EXPLODING KINGS */
 	effect_amount SET_ATTRIBUTE KING_CLASS ATTR_DEAD_ID 706 /* replace dead king with saboteur */
@@ -572,9 +576,9 @@ if COLDMAP /* snowy pine forest */
 	create_terrain SNOW_FOREST
 	{
 		base_terrain BAMBOO
-		land_percent 52
+		land_percent 51
 		number_of_clumps 999
-		clumping_factor 7
+		clumping_factor 6
 		set_avoid_player_start_areas 8 /* prevent vision-blocking trees around spawns */
 	}
 	create_terrain PINE_FOREST
@@ -656,17 +660,17 @@ if COLDMAP /* snowy pine forest */
 		base_terrain SHALLOW
 		clumping_factor 1
 	if TINY_MAP
-		number_of_tiles 140
-		number_of_clumps 140
+		number_of_tiles 120
+		number_of_clumps 120
 	elseif SMALL_MAP
-		number_of_tiles 170
-		number_of_clumps 170
+		number_of_tiles 160
+		number_of_clumps 160
 	elseif MEDIUM_MAP
-		number_of_tiles 210
-		number_of_clumps 210
+		number_of_tiles 200
+		number_of_clumps 200
 	elseif LARGE_MAP
-		number_of_tiles 250
-		number_of_clumps 250
+		number_of_tiles 240
+		number_of_clumps 240
 	elseif HUGE_MAP
 		number_of_tiles 280
 		number_of_clumps 280
@@ -674,8 +678,8 @@ if COLDMAP /* snowy pine forest */
 		number_of_tiles 310
 		number_of_clumps 310
 	elseif LUDIKRIS_MAP
-		number_of_tiles 330
-		number_of_clumps 330
+		number_of_tiles 340
+		number_of_clumps 340
 	endif
 	}
 
@@ -699,9 +703,9 @@ elseif WARMMAP /* tropical palm forest */
 	create_terrain JUNGLE
 	{
 		base_terrain BAMBOO
-		land_percent 62
+		land_percent 61
 		number_of_clumps 999
-		clumping_factor 7
+		clumping_factor 6
 		set_avoid_player_start_areas 7
 	}
 	create_terrain PALM_DESERT
@@ -783,17 +787,17 @@ elseif WARMMAP /* tropical palm forest */
 		base_terrain SHALLOW
 		clumping_factor 1
 	if TINY_MAP
-		number_of_tiles 140
-		number_of_clumps 140
+		number_of_tiles 120
+		number_of_clumps 120
 	elseif SMALL_MAP
-		number_of_tiles 170
-		number_of_clumps 170
+		number_of_tiles 160
+		number_of_clumps 160
 	elseif MEDIUM_MAP
-		number_of_tiles 210
-		number_of_clumps 210
+		number_of_tiles 200
+		number_of_clumps 200
 	elseif LARGE_MAP
-		number_of_tiles 250
-		number_of_clumps 250
+		number_of_tiles 240
+		number_of_clumps 240
 	elseif HUGE_MAP
 		number_of_tiles 280
 		number_of_clumps 280
@@ -801,8 +805,8 @@ elseif WARMMAP /* tropical palm forest */
 		number_of_tiles 310
 		number_of_clumps 310
 	elseif LUDIKRIS_MAP
-		number_of_tiles 330
-		number_of_clumps 330
+		number_of_tiles 340
+		number_of_clumps 340
 	endif
 	}
 endif
@@ -896,12 +900,21 @@ if KING_OT_HILL /* king of the hill - monument */
 		find_closest
 	}
 else
+	create_object RELIC /* mid relic */
+	{
+		number_of_objects 1
+		set_gaia_object_only
+		place_on_specific_land_id 60
+		find_closest
+		actor_area 88
+	}
 	create_object DLC_BOXTURTLE /* mid turtles */
 	{
 		temp_min_distance_group_placement 2
 		find_closest
 		ignore_terrain_restrictions
 		place_on_specific_land_id 60
+		avoid_actor_area 88 1
 	if TINY_MAP
 		number_of_objects 2
 	elseif SMALL_MAP
@@ -1008,6 +1021,111 @@ if COLDMAP
 		find_closest
 		ignore_terrain_restrictions
 	}
+	create_object GRASSPATCH
+	{
+		terrain_to_place_on SHALLOW
+		temp_min_distance_group_placement 6
+		min_distance_to_map_edge 1
+	if TINY_MAP
+		number_of_objects 25
+	elseif SMALL_MAP
+		number_of_objects 30
+	elseif MEDIUM_MAP
+		number_of_objects 35
+	elseif LARGE_MAP
+		number_of_objects 40
+	elseif HUGE_MAP
+		number_of_objects 45
+	elseif GIGANTIC_MAP
+		number_of_objects 55
+	elseif LUDIKRIS_MAP
+		number_of_objects 70
+	endif
+	}
+	create_object GRASSPATCH
+	{
+		terrain_to_place_on DLC_GRAVELBEACH
+		temp_min_distance_group_placement 2
+		min_distance_to_map_edge 1
+	if TINY_MAP
+		number_of_objects 35
+	elseif SMALL_MAP
+		number_of_objects 40
+	elseif MEDIUM_MAP
+		number_of_objects 45
+	elseif LARGE_MAP
+		number_of_objects 50
+	elseif HUGE_MAP
+		number_of_objects 55
+	elseif GIGANTIC_MAP
+		number_of_objects 60
+	elseif LUDIKRIS_MAP
+		number_of_objects 70
+	endif
+	}
+	create_object FLOWERPATCH
+	{
+		terrain_to_place_on DLC_GRAVELBEACH
+		temp_min_distance_group_placement 6
+		min_distance_to_map_edge 2
+	if TINY_MAP
+		number_of_objects 30
+	elseif SMALL_MAP
+		number_of_objects 35
+	elseif MEDIUM_MAP
+		number_of_objects 40
+	elseif LARGE_MAP
+		number_of_objects 45
+	elseif HUGE_MAP
+		number_of_objects 50
+	elseif GIGANTIC_MAP
+		number_of_objects 60
+	elseif LUDIKRIS_MAP
+		number_of_objects 70
+	endif
+	}
+	create_object GRASSPATCH
+	{
+		terrain_to_place_on DLC_BEACH2
+		temp_min_distance_group_placement 4
+		min_distance_to_map_edge 1
+	if TINY_MAP
+		number_of_objects 25
+	elseif SMALL_MAP
+		number_of_objects 30
+	elseif MEDIUM_MAP
+		number_of_objects 35
+	elseif LARGE_MAP
+		number_of_objects 40
+	elseif HUGE_MAP
+		number_of_objects 45
+	elseif GIGANTIC_MAP
+		number_of_objects 50
+	elseif LUDIKRIS_MAP
+		number_of_objects 60
+	endif
+	}
+	create_object BUTTERFLY3
+	{
+		terrain_to_place_on SHALLOW
+		temp_min_distance_group_placement 12
+		min_distance_to_map_edge 4
+	if TINY_MAP
+		number_of_objects 20
+	elseif SMALL_MAP
+		number_of_objects 22
+	elseif MEDIUM_MAP
+		number_of_objects 24
+	elseif LARGE_MAP
+		number_of_objects 28
+	elseif HUGE_MAP
+		number_of_objects 32
+	elseif GIGANTIC_MAP
+		number_of_objects 38
+	elseif LUDIKRIS_MAP
+		number_of_objects 44
+	endif
+	}
 elseif WARMMAP
 	create_object MACAW /* birds */
 	{
@@ -1095,6 +1213,111 @@ elseif WARMMAP
 		place_on_specific_land_id 65
 		find_closest
 		ignore_terrain_restrictions
+	}
+	create_object GRASSPATCH
+	{
+		terrain_to_place_on SHALLOW
+		temp_min_distance_group_placement 6
+		min_distance_to_map_edge 1
+	if TINY_MAP
+		number_of_objects 25
+	elseif SMALL_MAP
+		number_of_objects 30
+	elseif MEDIUM_MAP
+		number_of_objects 35
+	elseif LARGE_MAP
+		number_of_objects 40
+	elseif HUGE_MAP
+		number_of_objects 45
+	elseif GIGANTIC_MAP
+		number_of_objects 55
+	elseif LUDIKRIS_MAP
+		number_of_objects 70
+	endif
+	}
+	create_object GRASSPATCH
+	{
+		terrain_to_place_on DLC_WETROCKBEACH
+		temp_min_distance_group_placement 2
+		min_distance_to_map_edge 1
+	if TINY_MAP
+		number_of_objects 35
+	elseif SMALL_MAP
+		number_of_objects 40
+	elseif MEDIUM_MAP
+		number_of_objects 45
+	elseif LARGE_MAP
+		number_of_objects 50
+	elseif HUGE_MAP
+		number_of_objects 55
+	elseif GIGANTIC_MAP
+		number_of_objects 60
+	elseif LUDIKRIS_MAP
+		number_of_objects 70
+	endif
+	}
+	create_object FLOWERPATCH
+	{
+		terrain_to_place_on DLC_WETROCKBEACH
+		temp_min_distance_group_placement 6
+		min_distance_to_map_edge 2
+	if TINY_MAP
+		number_of_objects 30
+	elseif SMALL_MAP
+		number_of_objects 35
+	elseif MEDIUM_MAP
+		number_of_objects 40
+	elseif LARGE_MAP
+		number_of_objects 45
+	elseif HUGE_MAP
+		number_of_objects 50
+	elseif GIGANTIC_MAP
+		number_of_objects 60
+	elseif LUDIKRIS_MAP
+		number_of_objects 70
+	endif
+	}
+	create_object GRASSPATCH
+	{
+		terrain_to_place_on DLC_BEACH2
+		temp_min_distance_group_placement 4
+		min_distance_to_map_edge 1
+	if TINY_MAP
+		number_of_objects 25
+	elseif SMALL_MAP
+		number_of_objects 30
+	elseif MEDIUM_MAP
+		number_of_objects 35
+	elseif LARGE_MAP
+		number_of_objects 40
+	elseif HUGE_MAP
+		number_of_objects 45
+	elseif GIGANTIC_MAP
+		number_of_objects 50
+	elseif LUDIKRIS_MAP
+		number_of_objects 60
+	endif
+	}
+	create_object BUTTERFLY3
+	{
+		terrain_to_place_on SHALLOW
+		temp_min_distance_group_placement 12
+		min_distance_to_map_edge 4
+	if TINY_MAP
+		number_of_objects 20
+	elseif SMALL_MAP
+		number_of_objects 22
+	elseif MEDIUM_MAP
+		number_of_objects 24
+	elseif LARGE_MAP
+		number_of_objects 28
+	elseif HUGE_MAP
+		number_of_objects 32
+	elseif GIGANTIC_MAP
+		number_of_objects 38
+	elseif LUDIKRIS_MAP
+		number_of_objects 44
+	endif
 	}
 endif
 
