@@ -1,9 +1,9 @@
 /* TurtleTowers-ForestNothing | TrtleTunnl's 2023 Remix */
 /* https://www.ageofempires.com/mods/details/150470 */
 /* https://github.com/TrtleTunnl/AoE2-TurtleTowers */
-/* A prettier "Forest Nothing" map with TURTLES, relics, controllable towers, and small exploding kings for Regicide */
+/* Enjoy a prettier "ForestNothing" map with TURTLES, relics, controllable towers, and small exploding kings for Regicide */
 /* Random Map, Regicide, and King of the Hill support for Age of Empires II: Definitive Edition */
-/* Map Version: T15 */
+/* Map Version: T16 */
 
 /* MAP STYLES */
 start_random
@@ -19,7 +19,7 @@ end_random
 #const TECHONAGER 257 /* onager tech */
 #const GRASSPATCH 1358 /* green grass */
 #const FLOWERPATCH 1366 /* small flowers */
-#const BUTTERFLY3 1610 /* butterflies */
+#const BUTTERFLY1 1608 /* butterflies */
 
 <PLAYER_SETUP>
 
@@ -116,11 +116,11 @@ if KING_OT_HILL
 	elseif MEDIUM_MAP
 		number_of_tiles 70
 	elseif LARGE_MAP
-		number_of_tiles 75
-	elseif HUGE_MAP
 		number_of_tiles 80
-	elseif GIGANTIC_MAP
+	elseif HUGE_MAP
 		number_of_tiles 90
+	elseif GIGANTIC_MAP
+		number_of_tiles 100
 	elseif LUDIKRIS_MAP
 		number_of_tiles 110
 	endif
@@ -138,11 +138,11 @@ else
 	elseif SMALL_MAP
 		number_of_tiles 35
 	elseif MEDIUM_MAP
-		number_of_tiles 40
-	elseif LARGE_MAP
 		number_of_tiles 45
-	elseif HUGE_MAP
+	elseif LARGE_MAP
 		number_of_tiles 50
+	elseif HUGE_MAP
+		number_of_tiles 55
 	elseif GIGANTIC_MAP
 		number_of_tiles 60
 	elseif LUDIKRIS_MAP
@@ -157,19 +157,19 @@ create_land /* top area */
 	land_position 60 40
 	land_id 61
 if TINY_MAP
-	number_of_tiles 40
+	number_of_tiles 45
 elseif SMALL_MAP
-	number_of_tiles 50
-elseif MEDIUM_MAP
 	number_of_tiles 60
-elseif LARGE_MAP
+elseif MEDIUM_MAP
 	number_of_tiles 70
+elseif LARGE_MAP
+	number_of_tiles 80
 elseif HUGE_MAP
-	number_of_tiles 90
+	number_of_tiles 100
 elseif GIGANTIC_MAP
-	number_of_tiles 110
+	number_of_tiles 120
 elseif LUDIKRIS_MAP
-	number_of_tiles 130
+	number_of_tiles 140
 endif
 }
 create_land /* left area */
@@ -178,19 +178,19 @@ create_land /* left area */
 	land_position 37 47
 	land_id 63
 if TINY_MAP
-	number_of_tiles 40
+	number_of_tiles 45
 elseif SMALL_MAP
-	number_of_tiles 50
-elseif MEDIUM_MAP
 	number_of_tiles 60
-elseif LARGE_MAP
+elseif MEDIUM_MAP
 	number_of_tiles 70
+elseif LARGE_MAP
+	number_of_tiles 80
 elseif HUGE_MAP
-	number_of_tiles 90
+	number_of_tiles 100
 elseif GIGANTIC_MAP
-	number_of_tiles 110
+	number_of_tiles 120
 elseif LUDIKRIS_MAP
-	number_of_tiles 130
+	number_of_tiles 140
 endif
 }
 create_land /* right area */
@@ -199,19 +199,19 @@ create_land /* right area */
 	land_position 53 63
 	land_id 65
 if TINY_MAP
-	number_of_tiles 40
+	number_of_tiles 45
 elseif SMALL_MAP
-	number_of_tiles 50
-elseif MEDIUM_MAP
 	number_of_tiles 60
-elseif LARGE_MAP
+elseif MEDIUM_MAP
 	number_of_tiles 70
+elseif LARGE_MAP
+	number_of_tiles 80
 elseif HUGE_MAP
-	number_of_tiles 90
+	number_of_tiles 100
 elseif GIGANTIC_MAP
-	number_of_tiles 110
+	number_of_tiles 120
 elseif LUDIKRIS_MAP
-	number_of_tiles 130
+	number_of_tiles 140
 endif
 }
 
@@ -838,9 +838,17 @@ endif
 
 <OBJECTS_GENERATION>
 
+
 create_object TOWN_CENTER /* town center */
 {
 	set_place_for_every_player
+	min_distance_to_players 0
+	max_distance_to_players 0
+}
+create_object FLOWER_BED /* spawn flowers */
+{
+	set_place_for_every_player
+	set_gaia_object_only
 	min_distance_to_players 0
 	max_distance_to_players 0
 }
@@ -1067,7 +1075,7 @@ if COLDMAP
 	{
 		terrain_to_place_on DLC_GRAVELBEACH
 		temp_min_distance_group_placement 6
-		min_distance_to_map_edge 2
+		min_distance_to_map_edge 3
 	if TINY_MAP
 		number_of_objects 30
 	elseif SMALL_MAP
@@ -1105,25 +1113,25 @@ if COLDMAP
 		number_of_objects 60
 	endif
 	}
-	create_object BUTTERFLY3
+	create_object BUTTERFLY1
 	{
 		terrain_to_place_on SHALLOW
 		temp_min_distance_group_placement 12
 		min_distance_to_map_edge 4
 	if TINY_MAP
-		number_of_objects 20
+		number_of_objects 8
 	elseif SMALL_MAP
-		number_of_objects 22
+		number_of_objects 10
 	elseif MEDIUM_MAP
-		number_of_objects 24
+		number_of_objects 12
 	elseif LARGE_MAP
-		number_of_objects 28
+		number_of_objects 14
 	elseif HUGE_MAP
-		number_of_objects 32
+		number_of_objects 16
 	elseif GIGANTIC_MAP
-		number_of_objects 38
+		number_of_objects 18
 	elseif LUDIKRIS_MAP
-		number_of_objects 44
+		number_of_objects 20
 	endif
 	}
 elseif WARMMAP
@@ -1260,7 +1268,7 @@ elseif WARMMAP
 	{
 		terrain_to_place_on DLC_WETROCKBEACH
 		temp_min_distance_group_placement 6
-		min_distance_to_map_edge 2
+		min_distance_to_map_edge 3
 	if TINY_MAP
 		number_of_objects 30
 	elseif SMALL_MAP
@@ -1298,25 +1306,25 @@ elseif WARMMAP
 		number_of_objects 60
 	endif
 	}
-	create_object BUTTERFLY3
+	create_object BUTTERFLY1
 	{
 		terrain_to_place_on SHALLOW
 		temp_min_distance_group_placement 12
 		min_distance_to_map_edge 4
 	if TINY_MAP
-		number_of_objects 20
+		number_of_objects 8
 	elseif SMALL_MAP
-		number_of_objects 22
+		number_of_objects 10
 	elseif MEDIUM_MAP
-		number_of_objects 24
+		number_of_objects 12
 	elseif LARGE_MAP
-		number_of_objects 28
+		number_of_objects 14
 	elseif HUGE_MAP
-		number_of_objects 32
+		number_of_objects 16
 	elseif GIGANTIC_MAP
-		number_of_objects 38
+		number_of_objects 18
 	elseif LUDIKRIS_MAP
-		number_of_objects 44
+		number_of_objects 20
 	endif
 	}
 endif
