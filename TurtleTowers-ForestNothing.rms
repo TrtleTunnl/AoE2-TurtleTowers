@@ -1310,7 +1310,7 @@ elseif WARMMAP
 	{
 		terrain_to_place_on SHALLOW
 		temp_min_distance_group_placement 12
-		min_distance_to_map_edge 5
+		min_distance_to_map_edge 4
 	if TINY_MAP
 		number_of_objects 4
 	elseif SMALL_MAP
