@@ -3,7 +3,7 @@
 /* https://github.com/TrtleTunnl/AoE2-TurtleTowers */
 /* Enjoy a prettier "ForestNothing" map with TURTLES, relics, controllable towers, and small exploding kings for Regicide */
 /* Random Map, Regicide, and King of the Hill support for Age of Empires II: Definitive Edition */
-/* Map Version: T16 */
+/* Map Version: T17 */
 
 /* MAP STYLES */
 start_random
@@ -886,8 +886,8 @@ create_object BOMBARD_TOWER /* right tower */
 
 create_object DLC_BOXTURTLE /* turtle time */
 {
-	number_of_objects 50
-	number_of_clumps 50
+	number_of_objects 60
+	number_of_clumps 60
 	terrain_to_place_on DLC_WATER5
 	temp_min_distance_group_placement 1
 	ignore_terrain_restrictions
@@ -1098,19 +1098,19 @@ if COLDMAP
 		temp_min_distance_group_placement 4
 		min_distance_to_map_edge 1
 	if TINY_MAP
-		number_of_objects 25
-	elseif SMALL_MAP
 		number_of_objects 30
-	elseif MEDIUM_MAP
+	elseif SMALL_MAP
 		number_of_objects 35
-	elseif LARGE_MAP
+	elseif MEDIUM_MAP
 		number_of_objects 40
-	elseif HUGE_MAP
+	elseif LARGE_MAP
 		number_of_objects 45
-	elseif GIGANTIC_MAP
+	elseif HUGE_MAP
 		number_of_objects 50
-	elseif LUDIKRIS_MAP
+	elseif GIGANTIC_MAP
 		number_of_objects 60
+	elseif LUDIKRIS_MAP
+		number_of_objects 70
 	endif
 	}
 	create_object BUTTERFLY1
@@ -1119,19 +1119,19 @@ if COLDMAP
 		temp_min_distance_group_placement 12
 		min_distance_to_map_edge 4
 	if TINY_MAP
-		number_of_objects 8
+		number_of_objects 4
 	elseif SMALL_MAP
-		number_of_objects 10
+		number_of_objects 5
 	elseif MEDIUM_MAP
-		number_of_objects 12
+		number_of_objects 6
 	elseif LARGE_MAP
-		number_of_objects 14
+		number_of_objects 7
 	elseif HUGE_MAP
-		number_of_objects 16
+		number_of_objects 8
 	elseif GIGANTIC_MAP
-		number_of_objects 18
+		number_of_objects 10
 	elseif LUDIKRIS_MAP
-		number_of_objects 20
+		number_of_objects 12
 	endif
 	}
 elseif WARMMAP
@@ -1291,40 +1291,40 @@ elseif WARMMAP
 		temp_min_distance_group_placement 4
 		min_distance_to_map_edge 1
 	if TINY_MAP
-		number_of_objects 25
-	elseif SMALL_MAP
 		number_of_objects 30
-	elseif MEDIUM_MAP
+	elseif SMALL_MAP
 		number_of_objects 35
-	elseif LARGE_MAP
+	elseif MEDIUM_MAP
 		number_of_objects 40
-	elseif HUGE_MAP
+	elseif LARGE_MAP
 		number_of_objects 45
-	elseif GIGANTIC_MAP
+	elseif HUGE_MAP
 		number_of_objects 50
-	elseif LUDIKRIS_MAP
+	elseif GIGANTIC_MAP
 		number_of_objects 60
+	elseif LUDIKRIS_MAP
+		number_of_objects 70
 	endif
 	}
 	create_object BUTTERFLY1
 	{
 		terrain_to_place_on SHALLOW
 		temp_min_distance_group_placement 12
-		min_distance_to_map_edge 4
+		min_distance_to_map_edge 5
 	if TINY_MAP
-		number_of_objects 8
+		number_of_objects 4
 	elseif SMALL_MAP
-		number_of_objects 10
+		number_of_objects 5
 	elseif MEDIUM_MAP
-		number_of_objects 12
+		number_of_objects 6
 	elseif LARGE_MAP
-		number_of_objects 14
+		number_of_objects 7
 	elseif HUGE_MAP
-		number_of_objects 16
+		number_of_objects 8
 	elseif GIGANTIC_MAP
-		number_of_objects 18
+		number_of_objects 10
 	elseif LUDIKRIS_MAP
-		number_of_objects 20
+		number_of_objects 12
 	endif
 	}
 endif
