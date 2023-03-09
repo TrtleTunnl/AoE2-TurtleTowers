@@ -12,9 +12,7 @@ Variants: Jungle Palms, Snowy Pines
 
 
 Tweaks:
-
 -Trees set to 90 wood; reduces cut time by 10%
 -4 extra starting villagers
 -Livestock and huntables set to 100 food
 -Forage set to 50 food
--
