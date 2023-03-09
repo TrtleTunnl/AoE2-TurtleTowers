@@ -9,3 +9,7 @@ Enjoy a more beautiful "Forest Nothing" map with TURTLES, relics, controllable t
 Modes: Random Map, Regicide, King of the Hill
 
 Variants: Jungle Palms, Snowy Pines
+
+
+Tweaks:
+-Trees set to 90 wood, reducing cut time by 10%
