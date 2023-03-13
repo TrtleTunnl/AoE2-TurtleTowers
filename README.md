@@ -15,6 +15,8 @@ Tweaks:
 
 > Trees set to [90] wood (reduces cut time by 10%)
 
+> Scattered dots of land terrain (leaves/snow) around the map to speed up forest clear and add deer
+
 > [7] starting villagers
 
 > Livestock and huntables set to [100] food
