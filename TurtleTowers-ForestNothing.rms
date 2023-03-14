@@ -3,7 +3,7 @@
 /* https://github.com/TrtleTunnl/AoE2-TurtleTowers */
 /* Enjoy a prettier "ForestNothing" map with TURTLES, relics, controllable towers, and small exploding kings for Regicide */
 /* Random Map, Regicide, and King of the Hill support for Age of Empires II: Definitive Edition */
-/* Map Version: T18 */
+/* Map Version: T19 */
 
 /* MAP STYLES */
 start_random
@@ -17,8 +17,9 @@ end_random
 #const FUNGUSROAD 75 /* grassy road */
 #const GRAVELROAD 78 /* rocky road */
 #const TECHONAGER 257 /* onager tech */
-#const GRASSPATCH 1358 /* green grass */
-#const FLOWERPATCH 1366 /* small flowers */
+#const GRASSPATCH 301 /* lg grass */
+#const GRASSGRN 1358 /* sm grass */
+#const FLOWERS 1366 /* sm flowers */
 #const BUTTERFLY1 1608 /* butterflies */
 
 <PLAYER_SETUP>
@@ -838,7 +839,6 @@ endif
 
 <OBJECTS_GENERATION>
 
-
 create_object TOWN_CENTER /* town center */
 {
 	set_place_for_every_player
@@ -866,6 +866,7 @@ create_object BOMBARD_TOWER /* top tower */
 	set_building_capturable
 	make_indestructible
 	place_on_specific_land_id 62
+	second_object FLOWER_BED
 }
 create_object BOMBARD_TOWER /* left tower */
 {
@@ -874,6 +875,7 @@ create_object BOMBARD_TOWER /* left tower */
 	set_building_capturable
 	make_indestructible
 	place_on_specific_land_id 64
+	second_object FLOWER_BED
 }
 create_object BOMBARD_TOWER /* right tower */
 {
@@ -882,6 +884,7 @@ create_object BOMBARD_TOWER /* right tower */
 	set_building_capturable
 	make_indestructible
 	place_on_specific_land_id 66
+	second_object FLOWER_BED
 }
 
 create_object DLC_BOXTURTLE /* turtle time */
@@ -891,6 +894,25 @@ create_object DLC_BOXTURTLE /* turtle time */
 	terrain_to_place_on DLC_WATER5
 	temp_min_distance_group_placement 1
 	ignore_terrain_restrictions
+}
+
+create_object RELIC /* corner relics */
+{
+	number_of_objects 1
+	set_gaia_object_only
+	place_on_specific_land_id 30
+	find_closest
+	min_distance_to_map_edge 1
+	second_object GRASSGRN
+}
+create_object RELIC /* side relics */
+{
+	number_of_objects 1
+	set_gaia_object_only
+	place_on_specific_land_id 35
+	find_closest
+	min_distance_to_map_edge 1
+	second_object GRASSGRN
 }
 
 if REGICIDE /* regicide - king */
@@ -915,6 +937,7 @@ else
 		place_on_specific_land_id 60
 		find_closest
 		actor_area 88
+		second_object GRASSGRN
 	}
 	create_object DLC_BOXTURTLE /* mid turtles */
 	{
@@ -922,7 +945,7 @@ else
 		find_closest
 		ignore_terrain_restrictions
 		place_on_specific_land_id 60
-		avoid_actor_area 88 1
+		avoid_actor_area 88
 	if TINY_MAP
 		number_of_objects 2
 	elseif SMALL_MAP
@@ -941,6 +964,70 @@ else
 	}
 endif
 
+create_object BUTTERFLY1
+{
+	terrain_to_place_on SHALLOW
+	temp_min_distance_group_placement 12
+	min_distance_to_map_edge 4
+if TINY_MAP
+	number_of_objects 4
+elseif SMALL_MAP
+	number_of_objects 5
+elseif MEDIUM_MAP
+	number_of_objects 6
+elseif LARGE_MAP
+	number_of_objects 7
+elseif HUGE_MAP
+	number_of_objects 8
+elseif GIGANTIC_MAP
+	number_of_objects 10
+elseif LUDIKRIS_MAP
+	number_of_objects 12
+endif
+}
+create_object GRASSGRN
+{
+	terrain_to_place_on SHALLOW
+	temp_min_distance_group_placement 6
+	min_distance_to_map_edge 1
+if TINY_MAP
+	number_of_objects 30
+elseif SMALL_MAP
+	number_of_objects 35
+elseif MEDIUM_MAP
+	number_of_objects 40
+elseif LARGE_MAP
+	number_of_objects 45
+elseif HUGE_MAP
+	number_of_objects 50
+elseif GIGANTIC_MAP
+	number_of_objects 60
+elseif LUDIKRIS_MAP
+	number_of_objects 70
+endif
+}
+create_object GRASSGRN
+{
+	terrain_to_place_on DLC_BEACH2
+	temp_min_distance_group_placement 4
+	min_distance_to_map_edge 1
+if TINY_MAP
+	number_of_objects 30
+elseif SMALL_MAP
+	number_of_objects 35
+elseif MEDIUM_MAP
+	number_of_objects 40
+elseif LARGE_MAP
+	number_of_objects 45
+elseif HUGE_MAP
+	number_of_objects 50
+elseif GIGANTIC_MAP
+	number_of_objects 60
+elseif LUDIKRIS_MAP
+	number_of_objects 70
+endif
+}
+
 if COLDMAP
 	create_object HAWK /* birds */
 	{
@@ -952,6 +1039,7 @@ if COLDMAP
 		terrain_to_place_on SNOW
 		min_distance_to_map_edge 5
 		min_distance_to_players 10
+		second_object GRASSPATCH
 	if TINY_MAP
 		number_of_objects 35
 		temp_min_distance_group_placement 10
@@ -975,40 +1063,23 @@ if COLDMAP
 		temp_min_distance_group_placement 16
 	endif
 	}
-	/* CORNERS */
-	create_object RELIC
-	{
-		number_of_objects 1
-		set_gaia_object_only
-		place_on_specific_land_id 30
-		find_closest
-	}
-	create_object DLC_GOOSE
+	create_object DLC_GOOSE /* corner animals */
 	{
 		number_of_objects 3
-		set_gaia_object_only
 		temp_min_distance_group_placement 3
+		min_distance_to_map_edge 1
 		place_on_specific_land_id 30
 		find_closest
 	}
-	/* SIDES */
-	create_object RELIC
-	{
-		number_of_objects 1
-		set_gaia_object_only
-		place_on_specific_land_id 35
-		find_closest
-	}
-	create_object DLC_GOOSE
+	create_object DLC_GOOSE /* side animals */
 	{
 		number_of_objects 2
 		place_on_specific_land_id 35
 		temp_min_distance_group_placement 3
+		min_distance_to_map_edge 1
 		find_closest
-		ignore_terrain_restrictions
 	}
-	/* TOWERS */
-	create_object DLC_SNOWLEOPARD
+	create_object DLC_SNOWLEOPARD /* tower cats */
 	{
 		number_of_objects 1
 		place_on_specific_land_id 61
@@ -1029,32 +1100,12 @@ if COLDMAP
 		find_closest
 		ignore_terrain_restrictions
 	}
-	create_object GRASSPATCH
-	{
-		terrain_to_place_on SHALLOW
-		temp_min_distance_group_placement 6
-		min_distance_to_map_edge 1
-	if TINY_MAP
-		number_of_objects 25
-	elseif SMALL_MAP
-		number_of_objects 30
-	elseif MEDIUM_MAP
-		number_of_objects 35
-	elseif LARGE_MAP
-		number_of_objects 40
-	elseif HUGE_MAP
-		number_of_objects 45
-	elseif GIGANTIC_MAP
-		number_of_objects 55
-	elseif LUDIKRIS_MAP
-		number_of_objects 70
-	endif
-	}
-	create_object GRASSPATCH
+	create_object GRASSGRN
 	{
 		terrain_to_place_on DLC_GRAVELBEACH
 		temp_min_distance_group_placement 2
 		min_distance_to_map_edge 1
+		actor_area 77 0
 	if TINY_MAP
 		number_of_objects 35
 	elseif SMALL_MAP
@@ -1071,11 +1122,12 @@ if COLDMAP
 		number_of_objects 70
 	endif
 	}
-	create_object FLOWERPATCH
+	create_object FLOWERS
 	{
 		terrain_to_place_on DLC_GRAVELBEACH
 		temp_min_distance_group_placement 6
 		min_distance_to_map_edge 3
+		avoid_actor_area 77
 	if TINY_MAP
 		number_of_objects 35
 	elseif SMALL_MAP
@@ -1090,48 +1142,6 @@ if COLDMAP
 		number_of_objects 60
 	elseif LUDIKRIS_MAP
 		number_of_objects 70
-	endif
-	}
-	create_object GRASSPATCH
-	{
-		terrain_to_place_on DLC_BEACH2
-		temp_min_distance_group_placement 4
-		min_distance_to_map_edge 1
-	if TINY_MAP
-		number_of_objects 30
-	elseif SMALL_MAP
-		number_of_objects 35
-	elseif MEDIUM_MAP
-		number_of_objects 40
-	elseif LARGE_MAP
-		number_of_objects 45
-	elseif HUGE_MAP
-		number_of_objects 50
-	elseif GIGANTIC_MAP
-		number_of_objects 60
-	elseif LUDIKRIS_MAP
-		number_of_objects 70
-	endif
-	}
-	create_object BUTTERFLY1
-	{
-		terrain_to_place_on SHALLOW
-		temp_min_distance_group_placement 12
-		min_distance_to_map_edge 4
-	if TINY_MAP
-		number_of_objects 4
-	elseif SMALL_MAP
-		number_of_objects 5
-	elseif MEDIUM_MAP
-		number_of_objects 6
-	elseif LARGE_MAP
-		number_of_objects 7
-	elseif HUGE_MAP
-		number_of_objects 8
-	elseif GIGANTIC_MAP
-		number_of_objects 10
-	elseif LUDIKRIS_MAP
-		number_of_objects 12
 	endif
 	}
 elseif WARMMAP
@@ -1145,6 +1155,7 @@ elseif WARMMAP
 		terrain_to_place_on LEAVES
 		min_distance_to_map_edge 5
 		min_distance_to_players 10
+		second_object GRASSPATCH
 	if TINY_MAP
 		number_of_objects 35
 		temp_min_distance_group_placement 10
@@ -1168,40 +1179,23 @@ elseif WARMMAP
 		temp_min_distance_group_placement 16
 	endif
 	}
-	/* CORNERS */
-	create_object RELIC
-	{
-		number_of_objects 1
-		set_gaia_object_only
-		place_on_specific_land_id 30
-		find_closest
-	}
-	create_object TURKEY
+	create_object TURKEY /* corner animals */
 	{
 		number_of_objects 3
-		set_gaia_object_only
 		temp_min_distance_group_placement 3
 		place_on_specific_land_id 30
+		min_distance_to_map_edge 1
 		find_closest
 	}
-	/* SIDES */
-	create_object RELIC
-	{
-		number_of_objects 1
-		set_gaia_object_only
-		place_on_specific_land_id 35
-		find_closest
-	}
-	create_object TURKEY
+	create_object TURKEY /* side animals */
 	{
 		number_of_objects 2
 		place_on_specific_land_id 35
 		temp_min_distance_group_placement 3
+		min_distance_to_map_edge 1
 		find_closest
-		ignore_terrain_restrictions
 	}
-	/* TOWERS */
-	create_object JAGUAR
+	create_object JAGUAR /* tower cats */
 	{
 		number_of_objects 1
 		place_on_specific_land_id 61
@@ -1222,32 +1216,12 @@ elseif WARMMAP
 		find_closest
 		ignore_terrain_restrictions
 	}
-	create_object GRASSPATCH
-	{
-		terrain_to_place_on SHALLOW
-		temp_min_distance_group_placement 6
-		min_distance_to_map_edge 1
-	if TINY_MAP
-		number_of_objects 25
-	elseif SMALL_MAP
-		number_of_objects 30
-	elseif MEDIUM_MAP
-		number_of_objects 35
-	elseif LARGE_MAP
-		number_of_objects 40
-	elseif HUGE_MAP
-		number_of_objects 45
-	elseif GIGANTIC_MAP
-		number_of_objects 55
-	elseif LUDIKRIS_MAP
-		number_of_objects 70
-	endif
-	}
-	create_object GRASSPATCH
+	create_object GRASSGRN
 	{
 		terrain_to_place_on DLC_WETROCKBEACH
 		temp_min_distance_group_placement 2
 		min_distance_to_map_edge 1
+		actor_area 77 0
 	if TINY_MAP
 		number_of_objects 35
 	elseif SMALL_MAP
@@ -1264,11 +1238,12 @@ elseif WARMMAP
 		number_of_objects 70
 	endif
 	}
-	create_object FLOWERPATCH
+	create_object FLOWERS
 	{
 		terrain_to_place_on DLC_WETROCKBEACH
 		temp_min_distance_group_placement 6
 		min_distance_to_map_edge 3
+		avoid_actor_area 77
 	if TINY_MAP
 		number_of_objects 35
 	elseif SMALL_MAP
@@ -1283,48 +1258,6 @@ elseif WARMMAP
 		number_of_objects 60
 	elseif LUDIKRIS_MAP
 		number_of_objects 70
-	endif
-	}
-	create_object GRASSPATCH
-	{
-		terrain_to_place_on DLC_BEACH2
-		temp_min_distance_group_placement 4
-		min_distance_to_map_edge 1
-	if TINY_MAP
-		number_of_objects 30
-	elseif SMALL_MAP
-		number_of_objects 35
-	elseif MEDIUM_MAP
-		number_of_objects 40
-	elseif LARGE_MAP
-		number_of_objects 45
-	elseif HUGE_MAP
-		number_of_objects 50
-	elseif GIGANTIC_MAP
-		number_of_objects 60
-	elseif LUDIKRIS_MAP
-		number_of_objects 70
-	endif
-	}
-	create_object BUTTERFLY1
-	{
-		terrain_to_place_on SHALLOW
-		temp_min_distance_group_placement 12
-		min_distance_to_map_edge 4
-	if TINY_MAP
-		number_of_objects 4
-	elseif SMALL_MAP
-		number_of_objects 5
-	elseif MEDIUM_MAP
-		number_of_objects 6
-	elseif LARGE_MAP
-		number_of_objects 7
-	elseif HUGE_MAP
-		number_of_objects 8
-	elseif GIGANTIC_MAP
-		number_of_objects 10
-	elseif LUDIKRIS_MAP
-		number_of_objects 12
 	endif
 	}
 endif
